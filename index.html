@@ -11,7 +11,9 @@
 
     <input id="msg" placeholder="Message" />
     <button onclick="sendMsg()">Send</button>
-    <button onclick="createOffer()">Create Offer</button>
+    <button onclick="createOffer()">Start Video Call</button>
+    <video id="localVideo" autoplay muted playsinline></video>
+    <video id="remoteVideo" autoplay playsinline></video>
 
     <pre id="log"></pre>
 
@@ -19,6 +21,7 @@
         const socket = new WebSocket("ws://localhost:3001");
         let pc;
         let roomId = "";
+                                            let localStream;
 
         const log = (text) => {
             document.getElementById("log").textContent += text + "\n";
@@ -28,16 +31,12 @@
             log("Socket connected");
         };
 
-        // socket.onmessage = (event) => {
-        //     const data = JSON.parse(event.data);
-        //     log("Received: " + JSON.stringify(data));
-        // };
         socket.onmessage = async (event) => {
             const message = JSON.parse(event.data);
 
             if (message.type === "offer") {
                 log("Received offer");
-
+                await startMedia();
                 createPeerConnection();
 
                 await pc.setRemoteDescription(message.offer);
@@ -107,6 +106,7 @@
             pc = new RTCPeerConnection();
             log("Ice Candidate ");
 
+            // send ICE
             pc.onicecandidate = (event) => {
                 if (event.candidate) {
                     socket.send(JSON.stringify({
@@ -116,9 +116,19 @@
                     }));
                 }
             };
+            // receive remote stream
+            pc.ontrack = (event) => {
+                document.getElementById("remoteVideo").srcObject = event.streams[0];
+            };
+
+            // add local tracks
+            localStream.getTracks().forEach(track => {
+                pc.addTrack(track, localStream);
+            });
         }
 
         async function createOffer() {
+            await startMedia();
             createPeerConnection();
 
             const offer = await pc.createOffer();
@@ -132,6 +142,16 @@
 
             log("Offer sent");
         }
+   async function startMedia() {
+        localStream = await navigator.mediaDevices.getUserMedia({
+            video: true,
+            audio: true
+        });
+
+        document.getElementById("localVideo").srcObject = localStream;
+    }
+    
+
     </script>
 </body>
 
