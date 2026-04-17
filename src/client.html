@@ -1,0 +1,52 @@
+<!doctype html>
+
+<!--
+    WebSocket chat client
+
+    WebSocket and WebRTC based multi-user chat sample with two-way video
+    calling, including use of TURN if applicable or necessary.
+
+    This file provides the structure of the chat client's web page, including
+    logging in, text chatting, and making private video calls to other users.
+
+    To read about how this sample works:  http://bit.ly/webrtc-from-chat
+
+
+-->
+
+<html>
+
+<head>
+    <title>WebSocket Chat Demo with WebRTC Calling</title>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="chat-client.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="infobox">
+            <p>Enter a username: <input id="name" type="text" maxlength="12" required autocomplete="username"
+                    inputmode="verbatim" placeholder="Username">
+                <input type="button" name="login" value="Log in" onclick="connect()">
+            </p>
+        </div>
+        <ul class="userlistbox"></ul>
+        <div class="chatbox"></div>
+        <div class="camerabox">
+            <video id="received_video" autoplay></video>
+            <video id="local_video" autoplay muted></video>
+            <button id="hangup-button" onclick="hangUpCall();" role="button" disabled>
+                Hang Up
+            </button>
+        </div>
+        <div class="empty-container"></div>
+        <div class="chat-controls">
+            Chat:<br />
+            <input id="text" type="text" name="text" size="100" maxlength="256"
+                placeholder="Say something meaningful..." autocomplete="off" onkeyup="handleKey(event)" disabled>
+            <input type="button" id="send" name="send" value="Send" onclick="handleSendButton()" disabled>
+        </div>
+    </div>
+</body>
+
+</html>

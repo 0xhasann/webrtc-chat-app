@@ -1,33 +1,19 @@
 {
   "name": "webrtc-chat-app",
   "version": "1.0.0",
-  "description": "",
-  "main": "dist/server.js",
+  "main": "src/chat-server.js",
   "scripts": {
-    "build": "tsc",
-    "build:browser": "tsc -p tsconfig.browser.json",
-    "dev": "ts-node-dev src/server.ts",
-    "start": "node dist/server.js",
-    "typecheck": "tsc --noEmit && eslint src",
-    "lint": "eslint src",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node src/chat-server.js",
+    "start": "node src/chat-server.js",
+    "lint": "eslint src"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
     "dotenv": "^17.4.2",
-    "ts-node-dev": "^2.0.0",
+    "websocket": "^1.0.35",
     "ws": "^8.20.0"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
-    "@types/dotenv": "^6.1.1",
-    "@types/node": "^22.19.17",
-    "@types/ws": "^8.18.1",
-    "eslint": "^10.2.0",
-    "typescript": "^6.0.2",
-    "typescript-eslint": "^8.58.1"
+    "eslint": "^10.2.0"
   }
 }
