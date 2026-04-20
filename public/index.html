@@ -1,13 +1,39 @@
-<html lang="en">
+<!doctype html>
+
+
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>WebSocket Chat Demo with WebRTC Calling</title>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="dist/index.js"></script>
 </head>
 
 <body>
-
+    <div class="container">
+        <div class="infobox">
+            <p>Enter a username: <input id="name" type="text" maxlength="12" required autocomplete="username"
+                    inputmode="verbatim" placeholder="Username">
+                <input type="button" name="login" value="Log in" onclick="connect()">
+            </p>
+        </div>
+        <ul class="userlistbox"></ul>
+        <div class="chatbox"></div>
+        <div class="camerabox">
+            <video id="received_video" autoplay></video>
+            <video id="local_video" autoplay muted></video>
+            <button id="hangup-button" onclick="hangUpCall();" role="button" disabled>
+                Hang Up
+            </button>
+        </div>
+        <div class="empty-container"></div>
+        <div class="chat-controls">
+            Chat:<br />
+            <input id="text" type="text" name="text" size="100" maxlength="256"
+                placeholder="Say something meaningful..." autocomplete="off" onkeyup="handleKey(event)" disabled>
+            <input type="button" id="send" name="send" value="Send" onclick="handleSendButton()" disabled>
+        </div>
+    </div>
 </body>
 
 </html>
