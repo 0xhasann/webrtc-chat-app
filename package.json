@@ -2,9 +2,9 @@
   "name": "webrtc-chat-app",
   "type": "module",
   "scripts": {
-    "dev": "bun run src/server/index.ts",
+    "dev": "bun run --watch src/server/index.ts",
     "start": "bun run src/server/index.ts",
-    "build:client": "bun build ./src/browser/index.ts --outdir ./dist --watch"
+    "build:browser": "bun build ./src/browser/index.ts --outfile public/dist/index.js --watch"
   },
   "devDependencies": {
     "@types/bun": "latest"
