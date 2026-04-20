@@ -11,12 +11,13 @@ type WsEvents = {
     "new-ice-candidate": (data: { candidate: RTCIceCandidateInit }) => void;
     "hang-up": () => void;
     "call": (data: { name: Name }) => void;
-    "accept": (data: { caller: Name }) => void;
+    "accept": (data: { name: Name }) => void;
     "user-list": (data: { names: Name[] }) => void;
 };
 
 export class WebSocketHandler {
     private ws: WebSocket;
+    public myUserName: Name | undefined;
     private listeners: { [K in keyof WsEvents]?: WsEvents[K] } = {};
 
 
@@ -30,6 +31,7 @@ export class WebSocketHandler {
     }
 
     login(name: Name) {
+        this.myUserName = name
         this.send({ type: "login", data: { name } });
     }
 
@@ -45,8 +47,8 @@ export class WebSocketHandler {
         this.send({ type: "hang-up" });
     }
 
-    accept(caller: Name) {
-        this.send({type:"accept", data: {caller}})
+    accept(name: Name) {
+        this.send({type:"accept", data: {name}})
     }
 
     call(name: Name) {

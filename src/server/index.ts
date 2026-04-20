@@ -99,9 +99,9 @@ wsServer.on('connection', (websocket: ExtendedWebSocket) => {
                     if (!websocket.userName) {
                         websocket.send("Login First");
                     } else {
-                        peerToPeer.set(parsedMessage.data.caller, websocket.userName);
-                        peerToPeer.set(websocket.userName, parsedMessage.data.caller);
-                        const callerSocket = websocketConnections.get(parsedMessage.data.caller);
+                        peerToPeer.set(parsedMessage.data.name, websocket.userName);
+                        peerToPeer.set(websocket.userName, parsedMessage.data.name);
+                        const callerSocket = websocketConnections.get(parsedMessage.data.name);
                         callerSocket?.send(JSON.stringify({ type: "accept", data: { name: websocket.userName } }));
                     }
             }
