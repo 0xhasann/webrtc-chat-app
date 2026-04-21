@@ -13,14 +13,43 @@ import type { Name } from "../shared/chatmessage";
 import { RTCPeerConnectionHandler } from "./webrtcEventHandler";
 import { WebSocketHandler } from "./websocketHandler";
 
+export function disableRemoteNameLabel() {
+    const remoteLabel = document.getElementById("remote-name-label") as HTMLSpanElement;
+    remoteLabel.textContent = "";
+    remoteLabel.style.display = "none";
+    const btn = document.getElementById("hangup-button");
+    if (btn) {
+        btn.style.display = "none";
+    }
+
+}
+export function setRemoteNameLabel(remoteName: string) {
+    const remoteLabel = document.getElementById("remote-name-label") as HTMLSpanElement;
+    const btn = document.getElementById("hangup-button");
+    remoteLabel.textContent = remoteName;
+    if (btn) {
+        btn.style.display = "block";
+    }
+}
 export function login() {
     const ws = WebSocketHandler.getInstance();
-    const username = getUserName();
-    if (!username) {
+    const nameInput = document.getElementById("name") as HTMLInputElement;
+    const loginForm = document.getElementById("login-form") as HTMLParagraphElement;
+    const welcomeText = document.getElementById("welcome-text") as HTMLParagraphElement;
+    const name = nameInput.value.trim();
+    if (!name) return;
+
+    loginForm.style.display = "none";
+
+    welcomeText.textContent = `Welcome To Waves, ${name}!`;
+    welcomeText.style.display = "block";
+    const localLabel = document.getElementById("local-name-label") as HTMLSpanElement;
+    localLabel.textContent = name;
+    if (!name) {
         alert("Name not set");
         return;
     }
-    ws.login(username);
+    ws.login(name);
 }
 
 export function renderUserList(data: { names: Name[] }) {
@@ -93,6 +122,8 @@ export function renderIncomingCall(data: { name: Name }) {
                 }
             });
         }
+        setRemoteNameLabel(data.name);
+
     });
 
     promptDiv.appendChild(message);
@@ -137,17 +168,6 @@ export function enableCallbutton() {
     }
 }
 
-export function getUserName(): Name | null {
-    const nameInput = document.getElementById("name") as HTMLInputElement | null;
-    if (!nameInput) {
-        return null;
-    }
-    const username = nameInput.value.trim();
-    if (username.length === 0) {
-        return null;
-    }
-    return username;
-}
 
 export function hangUpCall() {
     const ws = WebSocketHandler.getInstance();
@@ -155,6 +175,7 @@ export function hangUpCall() {
     const remoteVideo = document.getElementById("received_video") as HTMLVideoElement | null;
     ws.hangUp();
 
+    RTCPeerConnectionHandler.close();
     if (localVideo && localVideo.srcObject instanceof MediaStream) {
         localVideo.pause();
         localVideo.srcObject.getTracks().forEach((track) => {
@@ -170,8 +191,7 @@ export function hangUpCall() {
         remoteVideo.srcObject = null;
     }
     enableCallbutton();
-
-  
+    disableRemoteNameLabel();
 }
 
 export async function attachUserMedia() {
