@@ -49,6 +49,13 @@ function createPeerConnection(): RTCPeerConnection {
             })
             .catch(window.reportError);
     }
+    pc.onconnectionstatechange = () => {
+        const btn = document.getElementById("hangup-button");
+        if (!btn) return;
+        if (pc.connectionState === "connected") {
+            btn.style.display = "block";
+        }
+    };
     pc.ontrack = (event) => {
         const receivedVideo = document.getElementById("received_video") as HTMLVideoElement | null;
         if (receivedVideo && event.streams && event.streams[0]) {

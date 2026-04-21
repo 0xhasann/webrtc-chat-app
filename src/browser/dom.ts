@@ -59,7 +59,7 @@ export function renderUserList(data: { names: Name[] }) {
     userListDiv.appendChild(ul);
 }
 
-export function renderIncomingCall(data: {name: Name}) {
+export function renderIncomingCall(data: { name: Name }) {
     const ws = WebSocketHandler.getInstance();
     const userListDiv = document.getElementById("user-list");
     if (!userListDiv) return;
@@ -117,6 +117,26 @@ export function disableCallButton(name: Name) {
         });
     }
 }
+
+export function enableCallbutton() {
+    const userListDiv = document.getElementById("user-list");
+    if (userListDiv) {
+        const callButtons = userListDiv.querySelectorAll("button");
+        callButtons.forEach((btn) => {
+            const li = btn.closest("li");
+            if (li) {
+                btn.textContent = "Call";
+                btn.disabled = false;
+
+            }
+        });
+    }
+    const btn = document.getElementById("hangup-button");
+    if (btn) {
+        btn.style.display = "none";
+    }
+}
+
 export function getUserName(): Name | null {
     const nameInput = document.getElementById("name") as HTMLInputElement | null;
     if (!nameInput) {
@@ -149,6 +169,9 @@ export function hangUpCall() {
         });
         remoteVideo.srcObject = null;
     }
+    enableCallbutton();
+
+  
 }
 
 export async function attachUserMedia() {
