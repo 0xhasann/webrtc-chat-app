@@ -36,6 +36,9 @@ function hangupCall(webServer: ExtendedWebSocket) {
     peerToPeer.delete(firstPeer);
     peerToPeer.delete(secondPeer);
 
+    const secondPeerSocket = websocketConnections.get(secondPeer);
+    secondPeerSocket?.send(JSON.stringify({ type: "hang-up" }));
+
     console.log("Connection Closed");
 }
 
