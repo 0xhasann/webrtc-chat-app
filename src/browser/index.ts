@@ -1,4 +1,4 @@
-import { disableCallButton, attachUserMedia, getUserName, hangUpCall, renderIncomingCall, renderUserList, login } from "./dom";
+import { disableCallButton, attachUserMedia, hangUpCall, renderIncomingCall, renderUserList, login, setRemoteNameLabel } from "./dom";
 import { RTCPeerConnectionHandler } from "./webrtcEventHandler";
 import { WebSocketHandler } from "./websocketHandler";
 
@@ -20,12 +20,11 @@ ws.on("accept",async ({ name }) => {
     })
     ws.on("hang-up", () => {
         hangUpCall();
-        pc.getTransceivers().forEach(transceiver => {
-            transceiver.stop();
-        });
+       
     })
 
-   await attachUserMedia();
+    await attachUserMedia();
+    setRemoteNameLabel(name);
 });
 
 
@@ -38,7 +37,7 @@ ws.on("video-offer", async (event) => {
     });
     ws.on("hang-up", () => {
         hangUpCall();
-        pc.getTransceivers().forEach(t => t.stop());
+       
     });
 
     await pc.setRemoteDescription(event.sdp);
