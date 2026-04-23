@@ -1,5 +1,5 @@
 import { disableCallButton, attachUserMedia, hangUpCall, renderIncomingCall, renderUserList, login, setRemoteNameLabel } from "./dom";
-import { RTCPeerConnectionHandler } from "./webrtceventhandler";
+import { RTCPeerConnectionHandler } from "./webrtcEventHandler";
 import { WebSocketHandler } from "./websocketHandler";
 
 const ws = WebSocketHandler.getInstance();

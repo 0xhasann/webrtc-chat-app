@@ -10,7 +10,7 @@
 // hangup button
 
 import type { Name } from "../shared/chatmessage";
-import { RTCPeerConnectionHandler } from "./webrtceventhandler";
+import { RTCPeerConnectionHandler } from "./webrtcEventHandler";
 import { WebSocketHandler } from "./websocketHandler";
 
 export function disableRemoteNameLabel() {
