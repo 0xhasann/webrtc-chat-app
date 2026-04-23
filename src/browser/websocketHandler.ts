@@ -29,10 +29,10 @@ export class WebSocketHandler {
     private connect() {
 
         // const url = `${protocol}//${window.location.host}/ws`;
-        // const url = new URL("/ws", window.location.origin);
-        this.ws = new WebSocket(`wss://${window.location.host}/`);
+        const url = new URL("/ws", window.location.origin);
+        // this.ws = new WebSocket(`wss://${window.location.host}/`);
 
-        // this.ws = new WebSocket(url);
+        this.ws = new WebSocket(url);
         
 
         this.ws.onopen = () => {
