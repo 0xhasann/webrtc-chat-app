@@ -86,7 +86,20 @@ export class WebSocketHandler {
     }
 
     private handleWsMessages(event: MessageEvent) {
-        const json = JSON.parse(event.data);
+        let text: string;
+        if (typeof event.data === "string") {
+            text = event.data;
+        } else if (event.data instanceof ArrayBuffer) {
+            text = new TextDecoder().decode(new Uint8Array(event.data));
+        } else if (Array.isArray(event.data) && event.data[0] instanceof ArrayBuffer) {
+            text = new TextDecoder().decode(new Uint8Array(event.data[0]));
+        } else if (event.data && typeof (event.data as any).toString === "function") {
+            text = event.data.toString();
+        } else {
+            throw new Error("Unable to parse WebSocket event data");
+        }
+        const json = JSON.parse(text);
+
         const parsedMessage = WebSocketMessageSchema.parse(json);
 
         switch (parsedMessage.type) {
