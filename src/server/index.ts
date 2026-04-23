@@ -27,7 +27,7 @@ interface ExtendedWebSocket extends WebSocket {
 }
 
 const wsServer = new WebSocketServer({
-    server: webServer
+    noServer: true
 });
 // When a client connects to our websocket server
 // on connection event is triggered
@@ -53,7 +53,20 @@ function hangupCall(webServer: ExtendedWebSocket) {
     console.log("Connection Closed");
 }
 
+webServer.on("upgrade", (req, socket, head) => {
+    console.log("upgrade request:", req.url);
+    if (req.url !== "/ws") {
+        console.log("destroy socket:", req.url);
+        socket.destroy();
+        return;
+    }
+
+    wsServer.handleUpgrade(req, socket, head, (ws) => {
+        wsServer.emit("connection", ws, req);
+    });
+});
 wsServer.on('connection', (websocket: ExtendedWebSocket) => {
+    
     websocket.on("close", (code: number, reason: Buffer) => {
         hangupCall(websocket);
         if (!websocket.userName) return;
@@ -145,18 +158,7 @@ wsServer.on('connection', (websocket: ExtendedWebSocket) => {
 
     })
 
-    webServer.on("upgrade", (req, socket, head) => {
-        console.log("upgrade request:", req.url);
-        if (req.url !== "/ws") {
-            console.log("destroy socket:", req.url);
-            socket.destroy();
-            return;
-        }
-
-        wsServer.handleUpgrade(req, socket, head, (ws) => {
-            wsServer.emit("connection", ws, req);
-        });
-    });
+    
 })
 
 
