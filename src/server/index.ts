@@ -1,11 +1,14 @@
-import WebSocket, { WebSocketServer } from "ws";
+import { WebSocketServer, WebSocket } from "ws";
 import { createServer } from "http";
 import { handleWebRequest, log, PORT } from "./utils";
 import { WebSocketMessageSchema, type WebSocketMessage } from "../shared";
 import type { Name } from "../shared/chatmessage";
 import * as z from "zod";
 //create a http server
-const webServer = createServer(handleWebRequest);
+// const webServer = createServer(handleWebRequest);
+const webServer = createServer((req, res) => {
+    handleWebRequest(req, res);
+});
 //listen http req and sends http res via PORT
 webServer.listen(PORT, () => {
     log(`Server is listening on http://localhost:${PORT}`);
@@ -129,9 +132,18 @@ wsServer.on('connection', (websocket: ExtendedWebSocket) => {
     })
 })
 
-wsServer.on('close', () => console.log("Websocket Server Closed"))
+wsServer.on('close', () => {
+    console.log("Websocket Server Closed");
+})
 
-wsServer.on('error', () => { })
+wsServer.on("error", (err) => {
+    console.error("WS Server Error:", err);
+});
 
-// type PeerId = UUID;
-// type Connections = Map<PeerId, WebSocket>;
+wsServer.on("connection", (ws, req) => {
+    console.log("WS CONNECTED:", req.url);
+});
+
+webServer.on("upgrade", (req, socket, head) => {
+    console.log("UPGRADE REQUEST:", req.url);
+});

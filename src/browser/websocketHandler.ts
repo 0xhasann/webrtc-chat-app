@@ -29,7 +29,7 @@ export class WebSocketHandler {
     private connect() {
         const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
 
-        const url = `${protocol}//${window.location.host}/ws`;
+        const url = `${protocol}//${window.location.host}`;
 
         this.ws = new WebSocket(url);
 
