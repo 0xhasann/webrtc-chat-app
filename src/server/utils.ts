@@ -2,7 +2,8 @@ import { IncomingMessage, ServerResponse } from "http";
 import { readFile, existsSync } from "fs";
 import { extname, join } from "path";
 
-export const PORT: number = 3000;
+export const PORT = process.env.PORT || 3000;
+
 
 const mimeTypes: Record<string, string> = {
     ".html": "text/html",
