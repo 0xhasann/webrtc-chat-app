@@ -1,10 +1,18 @@
-import { WebSocketServer, WebSocket } from "ws";
+// import { WebSocketServer, WebSocket } from "ws";
+// import { createServer } from "http";
+// import { handleWebRequest, log, PORT } from "./utils";
+// import { WebSocketMessageSchema, type WebSocketMessage } from "../shared";
+// import type { Name } from "../shared/chatmessage";
+// import * as z from "zod";
+//create a http server
+
 import { createServer } from "http";
 import { handleWebRequest, log, PORT } from "./utils";
-import { WebSocketMessageSchema, type WebSocketMessage } from "../shared";
+import { WebSocketServer, WebSocket } from "ws";
 import type { Name } from "../shared/chatmessage";
-import * as z from "zod";
-//create a http server
+import { WebSocketMessageSchema } from "../shared";
+import * as z from "zod"
+
 // const webServer = createServer(handleWebRequest);
 const webServer = createServer((req, res) => {
     handleWebRequest(req, res);
@@ -86,7 +94,13 @@ wsServer.on('connection', (websocket: ExtendedWebSocket) => {
                 case "login":
                     websocketConnections.set(parsedMessage.data.name, websocket);
                     websocket.userName = parsedMessage.data.name;
-                    websocketConnections.forEach((list) => list.send(JSON.stringify({ type: "user-list", data: { names: websocketConnections.keys().toArray() } })))
+                    websocketConnections.forEach((list) => 
+                        list.send(JSON.stringify({ 
+                            type: "user-list", 
+                            data: { names: Array.from(websocketConnections.keys()) } 
+                        }))
+                    );
+               
                     break
                 // If call is coming from user to server then name is callee
                 // If call is coming from server to user then name is caller
