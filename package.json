@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "bun run --watch src/server/index.ts",
     "start": "bun run src/server/index.ts",
-    "build:browser": "bun build ./src/browser/index.ts --outfile public/index.js --watch --target browser"
+    "build:browser:dev": "bun build ./src/browser/index.ts --outfile public/index.js --watch --target browser",
+    "build:browser:prod": "bun build ./src/browser/index.ts --outfile public/index.js --target browser"
   },
   "devDependencies": {
     "@types/bun": "latest"
