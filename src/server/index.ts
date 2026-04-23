@@ -27,7 +27,7 @@ interface ExtendedWebSocket extends WebSocket {
 }
 
 const wsServer = new WebSocketServer({
-    server: webServer
+    noServer: true
 });
 // When a client connects to our websocket server
 // on connection event is triggered
@@ -164,4 +164,5 @@ webServer.on("upgrade", (req, socket, head) => {
         wsServer.emit("connection", ws, req);
     });
 });
+
 
