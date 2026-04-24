@@ -1,26 +1,20 @@
 {
   "name": "waves",
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
-    "dev": "ts-node src/server/index.ts",
-    "build": "tsc",
-    "start": "node dist/server/index.js",
-    "build:client": "esbuild src/browser/index.ts --bundle --outfile=public/index.js --platform=browser"
+    "dev": "bun run --watch src/server/index.ts",
+    "start": "bun run src/server/index.ts",
+    "build:browser:dev": "bun build ./src/browser/index.ts --outfile public/index.js --watch --target browser",
+    "build:browser:prod": "bun build ./src/browser/index.ts --outfile public/index.js --target browser"
   },
   "devDependencies": {
-    "@types/bun": "latest",
-    "@types/node": "^25.6.0",
-    "@types/ws": "^8.18.1"
+    "@types/bun": "latest"
   },
   "peerDependencies": {
-    "typescript": "^5.9.3"
+    "typescript": "^5"
   },
   "dependencies": {
-    "esbuild": "^0.28.0",
-    "fs": "^0.0.1-security",
-    "http": "^0.0.1-security",
-    "ts-node": "^10.9.2",
-    "ws": "^8.20.0",
+    "@types/ws": "^8.18.1",
     "zod": "^4.3.6"
   }
 }
