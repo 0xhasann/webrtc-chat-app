@@ -2,14 +2,24 @@
 
 a minimal peer-to-peer web video chat app
 
-features:
+**live & usage:**
+
+this application is deployed on an AWS EC2 instance and accessible via a custom domain: **https://waves.cam** 
+the `.cam` domain is used since the `.com` variant is already occupied.
+
+- allow **camera and microphone permissions** when prompted  
+- ensure your browser supports modern WebRTC features  
+- use a modern browser (Chrome, Safari, Firefox, etc.) for best experience  
+
+
+**features:**
 - direct browser video call with another user
 - simple login, pick a name and see who’s online
 - click a user to call, accept or reject calls
 - pip-like local camera box
 - hang up anytime
 
-getting started:
+**getting started:**
 1. install bun (https://bun.sh/)
 2. run `bun install`
 3. start dev server: `bun run dev`
@@ -18,12 +28,12 @@ getting started:
 to build browser bundle:
 `bun run build:browser`
 
-tech stack:
+**tech stack:**
 - typescript
 - bun runtime
 - native web apis: [WebRTC](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API), [WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API), [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model), [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
 
-how it works:
+**how it works:**
 - [WebRTC Signaling & Connections (MDN Guide)](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Signaling_and_video_calling)
 - For in-depth details, check out:
   - [MDN: WebRTC API](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API)
@@ -38,22 +48,12 @@ how it works:
 
 <img src="public/webrtc_ice_candidate_exchange.svg" alt="WebRTC ICE candidate gathering diagram" width="540" style="margin:1em 0;"/>
 
-## Live & Usage
-
-This application is deployed on an AWS EC2 instance and accessible via a custom domain: **https://waves.cam** 
-The `.cam` domain is used since the `.com` variant is already occupied.
 
 
-### Usage
-- Allow **camera and microphone permissions** when prompted  
-- Ensure your browser supports modern WebRTC features  
-- Use a modern browser (Chrome, Edge, Firefox, etc.) for best experience  
 
----
+**notes:**
 
-##  Notes
-
-- Audio/video features will not work without **HTTPS**  
-- WebSocket connections use secure protocol: `wss://`  
-- If the app fails to connect, check browser permissions for camera/microphone  
-- For demo and learning use.
+- audio/video features will not work without **HTTPS**  
+- webSocket connections use secure protocol: `wss://`  
+- if the app fails to connect, check browser permissions for camera/microphone  
+- for demo and learning use.
