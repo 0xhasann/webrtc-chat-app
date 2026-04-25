@@ -4,7 +4,7 @@ a minimal peer-to-peer web video chat app
 
 **live & usage:**
 
-this application is deployed on an AWS EC2 instance and accessible via a custom domain: **https://waves.cam** 
+you can access this project via a custom domain: **https://waves.cam** 
 the `.cam` domain is used since the `.com` variant is already occupied.
 
 - allow **camera and microphone permissions** when prompted  
