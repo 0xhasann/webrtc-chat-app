@@ -28,7 +28,7 @@ body {
     width: 100%;
     max-width: 800px;
     aspect-ratio: 4 / 3;
-    background: black;
+    background: rgb(146, 158, 175);
     border-radius: 8px;
     overflow: hidden;
 }
@@ -51,30 +51,59 @@ body {
     height: auto;
 }
 
-#hangup-button {
-    position: absolute;
-    bottom: 12px;
-    left: 50%;
-    transform: translateX(-50%);
+
+.video-label.remote {
+    left: 8px;
+}
+
+/* local (bottom-right) */
+.video-label.local {
+    right: 8px;
+    left: auto;
 }
 
 .video-label {
     position: absolute;
     bottom: 8px;
     left: 8px;
+
     color: #fff;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 2px 8px;
-    border-radius: 4px;
     font-size: 14px;
+
+    padding: 4px 10px;
+
+    border: 1px solid rgb(146, 158, 175);
+
+    /* fix border */
+    border-radius: 999px;
+    /* clean pill shape */
+
+    /* background: rgba(0, 0, 0, 0.4); */
+    /* improves visibility */
 }
 
 .local-label {
+    /* bottom: 20px;
+    right: 20px;
+    left: auto;
+    font-size: 11px; */
     bottom: 20px;
     right: 20px;
     left: auto;
+
     font-size: 11px;
+    color: white;
+
+    padding: 4px 8px;
+    /* border added */
+    /* slightly rounded */
+
+    /* background: rgba(0, 0, 0, 0.5); */
+    border: 1px solid rgb(146, 158, 175);
+    border-radius: 999px;
+    /* pill style */
 }
+
 
 
 /* chat */
@@ -95,6 +124,54 @@ body {
     background: #075e54;
     color: white;
     font-weight: 600;
+}
+
+#messages {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.chat-input-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    background: #f0f0f0;
+}
+
+#chat-input {
+    flex: 1;
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    background: #ffffff;
+    padding: 0 14px;
+    font-size: 14px;
+    color: #333;
+}
+
+#chat-input::placeholder {
+    color: #aaa;
+}
+
+#send-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #075e54;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+
+#send-btn:hover {
+    background: #053d36;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 #messages {
@@ -139,14 +216,6 @@ body {
     align-items: center;
 }
 
-#chat-input {
-    flex: 1;
-    height: 10px;
-    padding: 0 12px;
-    border-radius: 18px;
-    border: none;
-    outline: none;
-}
 
 #send-btn {
     margin-left: 8px;
@@ -170,4 +239,64 @@ body {
     cursor: pointer;
     opacity: 1;
     pointer-events: auto;
+}
+
+.controls {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    gap: 12px;
+}
+
+/* base button */
+.controls button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.5);
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+/* icon */
+.controls img {
+    width: 20px;
+    height: 20px;
+}
+
+/* optional emoji support */
+.emoji {
+    font-size: 18px;
+}
+
+/* hover (default state) */
+.controls button:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* active state */
+.controls button.active {
+    background: red;
+}
+
+/* active hover */
+.controls button.active:hover {
+    background: #b30000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* make image white in active */
+.controls button.active img {
+    filter: brightness(0) invert(1);
 }

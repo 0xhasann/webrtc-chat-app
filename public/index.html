@@ -30,16 +30,32 @@
             <span id="remote-name-label" class="video-label"></span>
             <video id="local_video" autoplay muted></video>
             <span id="local-name-label" class="video-label local-label"></span>
+            <div class="controls">
+                <button id="micBtn">
+                    <img src="mic.png" />
+                </button>
+                <button id="videoBtn">
+                    <img src="cam_video.png" />
+                </button>
+                <button id="hangup-button" class="active"  style="display:none;">
+                    <img src="call.png" />
+                </button>
+            </div>
 
-            <button id="hangup-button" style="display:none;">Hang Up</button>
         </div>
         <div id="chat-container">
             <div id="chat-header">
-                <div id="chat-user">Chat </div>
+                <div id="chat-user">Chat</div>
             </div>
             <div id="messages"></div>
-            <input id="chat-input" disabled type="text" placeholder="Type message..." />
-            <button id="send-btn" disabled>Send</button>
+            <div class="chat-input-container">
+                <input id="chat-input"disabled type="text" placeholder="Type message..." />
+                <button id="send-btn" disabled>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+                        <path d="M2 21l21-9L2 3v7l15 2-15 2z" />
+                    </svg>
+                </button>
+            </div>
         </div>
 
     </div>

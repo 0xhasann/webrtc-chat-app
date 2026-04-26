@@ -26,6 +26,11 @@ import { WebSocketHandler } from "./websocketHandler";
 const ws = WebSocketHandler.getInstance();
 document.getElementById("loginBtn")?.addEventListener("click", login);
 document.getElementById("hangup-button")?.addEventListener("click", hangUpCall);
+document.querySelectorAll(".controls button").forEach(btn => {
+    btn.addEventListener("click", () => {
+        btn.classList.toggle("active");
+    });
+});
 
 
 ChatUI.init();
