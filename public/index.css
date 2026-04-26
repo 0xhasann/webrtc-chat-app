@@ -1,14 +1,11 @@
-/* ================= VIDEO ================= */
-
+/* video */
 
 body {
     margin: 0;
     height: 100vh;
     display: flex;
     justify-content: center;
-    /* horizontal center */
     align-items: center;
-    /* vertical center */
     background: #f0f2f5;
 }
 
@@ -20,14 +17,18 @@ body {
     max-width: 1200px;
     width: 100%;
     justify-content: center;
+    gap: 16px;
+    padding: 10px;
 }
 
 
 #camerabox {
     position: relative;
-    width: 640px;
     height: 480px;
-    background: #000;
+    width: 100%;
+    max-width: 800px;
+    aspect-ratio: 4 / 3;
+    background: black;
     border-radius: 8px;
     overflow: hidden;
 }
@@ -42,11 +43,12 @@ body {
     position: absolute;
     bottom: 12px;
     right: 12px;
-    width: 160px;
-    height: 120px;
     object-fit: cover;
     border-radius: 6px;
     border: 2px solid #fff;
+    width: 25%;
+    max-width: 180px;
+    height: auto;
 }
 
 #hangup-button {
@@ -75,20 +77,19 @@ body {
 }
 
 
-/* ================= CHAT ================= */
+/* chat */
 
 #chat-container {
-    width: 350px;
-    height: 500px;
-    /* fixed height */
+    height: 300px;
     display: flex;
     flex-direction: column;
     border: 1px solid #ccc;
     font-family: sans-serif;
     background: #efeae2;
+    width: 100%;
+    max-width: 400px;
 }
 
-/* header */
 #chat-header {
     padding: 12px;
     background: #075e54;
@@ -96,10 +97,8 @@ body {
     font-weight: 600;
 }
 
-/* messages */
 #messages {
     flex: 1;
-    /* takes remaining space */
     overflow-y: auto;
     padding: 10px;
     display: flex;
@@ -107,7 +106,6 @@ body {
     gap: 6px;
 }
 
-/* message bubble */
 .message {
     max-width: 75%;
     padding: 8px 10px;
@@ -117,19 +115,16 @@ body {
     overflow-wrap: anywhere;
 }
 
-/* sent */
 .self {
     align-self: flex-end;
     background: #d9fdd3;
 }
 
-/* received */
 .remote {
     align-self: flex-start;
     background: white;
 }
 
-/* time */
 .time {
     font-size: 10px;
     color: gray;
@@ -137,7 +132,6 @@ body {
     margin-top: 4px;
 }
 
-/* input area */
 #input-area {
     display: flex;
     padding: 8px;
@@ -147,7 +141,7 @@ body {
 
 #chat-input {
     flex: 1;
-    height: 36px;
+    height: 10px;
     padding: 0 12px;
     border-radius: 18px;
     border: none;
@@ -159,8 +153,21 @@ body {
     height: 36px;
     padding: 0 16px;
     border-radius: 18px;
-    background: #075e54;
-    color: white;
     border: none;
+    color: white;
+    transition: background 0.1s ease;
+}
+
+#send-btn:disabled {
+    background: #9e9e9e;
+    cursor: not-allowed;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+#send-btn:not(:disabled) {
+    background: #075e54;
     cursor: pointer;
+    opacity: 1;
+    pointer-events: auto;
 }
