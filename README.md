@@ -17,6 +17,7 @@ the `.cam` domain is used since the `.com` variant is already occupied.
 - simple login, pick a name and see who’s online
 - click a user to call, accept or reject calls
 - pip-like local camera box
+- peer to peer text chat
 - hang up anytime
 
 **getting started:**
