@@ -5,12 +5,17 @@ export class ChatUI {
     static init() {
         const input = document.getElementById("chat-input") as HTMLInputElement;
         const btn = document.getElementById("send-btn") as HTMLButtonElement;
+        btn.disabled = true;
 
         input.addEventListener("keydown", (e) => {
             if (e.key === "Enter") btn.click();
         });
 
         btn.onclick = () => {
+            if (!RTCPeerConnectionHandler.dataChannel ||
+                RTCPeerConnectionHandler.dataChannel.readyState !== "open") {
+                return;
+            }
             const message = input.value.trim();
             if (!message) return;
 

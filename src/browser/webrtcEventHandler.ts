@@ -99,16 +99,32 @@ function createPeerConnection(): RTCPeerConnection {
     pc.ondatachannel = (event) => {
         const dc = event.channel;
         RTCPeerConnectionHandler.dataChannel = dc;
-
-        dc.onopen = () => {
-            console.log("Data channel open");
-            document.getElementById("chat-input")?.removeAttribute("disabled");
-        };
-
-        dc.onmessage = (event) => {
-            ChatUI.appendMessage(event.data, "remote");
-        };
+        attachDataChannelHandlers(dc);
     };
     
     return pc;
+}
+
+export function attachDataChannelHandlers(dc: RTCDataChannel) {
+    dc.onopen = () => {
+        const input = document.getElementById("chat-input") as HTMLInputElement;
+        const btn = document.getElementById("send-btn") as HTMLButtonElement;
+
+        input.removeAttribute("disabled");
+        // btn.removeAttribute("disabled");
+        btn.disabled = false;
+    };
+
+    dc.onclose = () => {
+        const input = document.getElementById("chat-input") as HTMLInputElement;
+        const btn = document.getElementById("send-btn") as HTMLButtonElement;
+
+        input.setAttribute("disabled", "true");
+        // btn.setAttribute("disabled", "true");
+        btn.disabled = true;
+    };
+
+    dc.onmessage = (event) => {
+        ChatUI.appendMessage(event.data, "remote");
+    };
 }

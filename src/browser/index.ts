@@ -20,7 +20,7 @@ ws.on("new-ice-candidate") → pc.addIceCandidate()
 
 import { ChatUI } from "./chat";
 import { disableCallButton, attachUserMedia, hangUpCall, renderIncomingCall, renderUserList, login, setRemoteNameLabel } from "./dom";
-import { RTCPeerConnectionHandler } from "./webrtcEventHandler";
+import { attachDataChannelHandlers, RTCPeerConnectionHandler } from "./webrtcEventHandler";
 import { WebSocketHandler } from "./websocketHandler";
 
 const ws = WebSocketHandler.getInstance();
@@ -43,17 +43,7 @@ ws.on("accept",async ({ name }) => {
     disableCallButton(name);
     const dc = pc.createDataChannel("chat");
     RTCPeerConnectionHandler.dataChannel = dc;
-
-    dc.onopen = () => {
-        console.log("Data channel open");
-        document.getElementById("chat-input")?.removeAttribute("disabled");
-    };
-
-    dc.onmessage = (event) => {
-        ChatUI.appendMessage(event.data, "remote");
-    };
-
-
+    attachDataChannelHandlers(dc);
 
     ws.on("hang-up", () => {
         hangUpCall();
