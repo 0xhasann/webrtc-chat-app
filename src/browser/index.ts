@@ -77,7 +77,6 @@ shareBtn?.addEventListener("click", async () => {
     await shareScreen();
 });
 
-
 ChatUI.init();
 const pc = RTCPeerConnectionHandler.pc;
 

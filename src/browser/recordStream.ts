@@ -83,44 +83,6 @@ function showDownloadPopup(blob: Blob) {
         popup.style.display = "none";
         backdrop.style.display = "none";
     };
-    // document.getElementById("recordingPopup")?.remove();
-
-    // const popup = document.createElement("div");
-    // popup.id = "recordingPopup";
-    // popup.style.cssText = `
-    //     position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    //     background: #1a1a2e; border: 1px solid #333; border-radius: 12px;
-    //     padding: 24px 28px; z-index: 9999; text-align: center;
-    //     color: #fff; font-family: sans-serif; min-width: 280px;
-    //     box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-    // `;
-
-    // popup.innerHTML = `
-    //     <h3 style="margin:0 0 8px; font-size:18px;">Recording Complete</h3>
-    //     <p style="margin:0 0 16px; color:#aaa; font-size:13px;">
-    //         Duration: <b style="color:#fff">${duration}</b> &nbsp;·&nbsp; Size: <b style="color:#fff">${size}</b>
-    //     </p>
-    //     <div style="display:flex; gap:10px; justify-content:center;">
-    //         <a id="popupDownload" href="${url}" download="screen-recording.webm"
-    //            style="padding:10px 20px; background:#e63946; color:#fff; border-radius:8px;
-    //                   text-decoration:none; font-weight:600; font-size:14px;">
-    //             ⬇ Download
-    //         </a>
-    //         <button id="popupClose"
-    //             style="padding:10px 20px; background:transparent; color:#aaa; border:1px solid #444;
-    //                    border-radius:8px; cursor:pointer; font-size:14px;">
-    //             Discard
-    //         </button>
-    //     </div>
-    // `;
-
-    // // Backdrop
-    // const backdrop = document.createElement("div");
-    // backdrop.id = "recordingBackdrop";
-    // backdrop.style.cssText = `
-    //     position: fixed; inset: 0; background: rgba(0,0,0,0.5);
-    //     z-index: 9998; backdrop-filter: blur(3px);
-    // `;
 
     const close = () => {
         popup.remove();
