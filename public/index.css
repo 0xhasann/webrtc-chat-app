@@ -1,5 +1,4 @@
 /* video */
-
 body {
     margin: 0;
     height: 100vh;
@@ -20,7 +19,6 @@ body {
     gap: 16px;
     padding: 10px;
 }
-
 
 #camerabox {
     position: relative;
@@ -51,12 +49,10 @@ body {
     height: auto;
 }
 
-
 .video-label.remote {
     left: 8px;
 }
 
-/* local (bottom-right) */
 .video-label.local {
     right: 8px;
     left: auto;
@@ -66,45 +62,23 @@ body {
     position: absolute;
     bottom: 8px;
     left: 8px;
-
     color: #fff;
     font-size: 14px;
-
     padding: 4px 10px;
-
     border: 1px solid rgb(146, 158, 175);
-
-    /* fix border */
     border-radius: 999px;
-    /* clean pill shape */
-
-    /* background: rgba(0, 0, 0, 0.4); */
-    /* improves visibility */
 }
 
 .local-label {
-    /* bottom: 20px;
-    right: 20px;
-    left: auto;
-    font-size: 11px; */
     bottom: 20px;
     right: 20px;
     left: auto;
-
     font-size: 11px;
     color: white;
-
     padding: 4px 8px;
-    /* border added */
-    /* slightly rounded */
-
-    /* background: rgba(0, 0, 0, 0.5); */
     border: 1px solid rgb(146, 158, 175);
     border-radius: 999px;
-    /* pill style */
 }
-
-
 
 /* chat */
 
@@ -157,15 +131,19 @@ body {
 
 #send-btn {
     width: 40px;
-    height: 40px;
-    border-radius: 50%;
     background: #075e54;
-    border: none;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    margin-left: 8px;
+    height: 36px;
+    padding: 0 16px;
+    border-radius: 18px;
+    border: none;
+    color: white;
+    transition: background 0.1s ease;
 }
 
 
@@ -216,17 +194,6 @@ body {
     align-items: center;
 }
 
-
-#send-btn {
-    margin-left: 8px;
-    height: 36px;
-    padding: 0 16px;
-    border-radius: 18px;
-    border: none;
-    color: white;
-    transition: background 0.1s ease;
-}
-
 #send-btn:disabled {
     background: #9e9e9e;
     cursor: not-allowed;
@@ -268,36 +235,30 @@ body {
     position: relative;
 }
 
-/* icon */
 .controls img {
     width: 20px;
     height: 20px;
 }
 
-/* optional emoji support */
 .emoji {
     font-size: 18px;
 }
 
-/* hover (default state) */
 .controls button:hover {
     background: rgba(250, 250, 250, 0.6);
     transform: scale(1.05);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* active state */
 .controls button.active {
     background: red;
 }
 
-/* active hover */
 .controls button.active:hover {
     background: #b30000;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* make image white in active */
 .controls button.active img {
     filter: brightness(0) invert(1);
 }
