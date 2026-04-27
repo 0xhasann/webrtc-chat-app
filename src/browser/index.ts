@@ -34,17 +34,19 @@ document.querySelectorAll(".controls button").forEach(btn => {
 
 let audioEnabled = true;
 let videoEnabled = true;
+let shareBtnEnabled = false;
 
 const micButton = document.getElementById("micBtn") as HTMLButtonElement | null;
 
 micButton?.addEventListener("click", () => {
     audioEnabled = !audioEnabled;
     micButton?.classList.toggle("active");
-
+    const tooltip = micButton?.querySelector(".tooltip");
+    if (tooltip) tooltip.textContent = audioEnabled ? "Mute" : "Unmute";
     (localStream as unknown as MediaStream | null)?.getAudioTracks().forEach(track => {
         track.enabled = audioEnabled;
     });
-    document.getElementById("micBtn")?.classList.toggle("active");
+    micButton?.classList.toggle("active");
 });
 
 const videoButton = document.getElementById("videoBtn") as HTMLButtonElement | null;
@@ -52,11 +54,27 @@ const videoButton = document.getElementById("videoBtn") as HTMLButtonElement | n
 videoButton?.addEventListener("click", () => {
     videoEnabled = !videoEnabled;
     videoButton?.classList.toggle("active");
+    const tooltip = videoButton?.querySelector(".tooltip");
+    if (tooltip) tooltip.textContent = videoEnabled ? "Stop Video" : "Start Video";
     (localStream as unknown as MediaStream | null)?.getVideoTracks().forEach(track => {
         track.enabled = videoEnabled;
     });
-    document.getElementById("videoBtn")?.classList.toggle("active");
+    videoButton?.classList.toggle("active");
+
 });
+
+const shareBtn = document.getElementById("share-button") as HTMLButtonElement | null;
+
+shareBtn?.addEventListener("click", () => {
+    shareBtnEnabled = !shareBtnEnabled
+    shareBtn.classList.toggle("active");
+    const tooltip = shareBtn?.querySelector(".tooltip");
+    if (tooltip) {
+        tooltip.textContent = shareBtnEnabled ? "Start Sharing" : "Stop Sharing";
+    }
+    shareBtn.classList.toggle("active");
+
+})
 
 
 ChatUI.init();

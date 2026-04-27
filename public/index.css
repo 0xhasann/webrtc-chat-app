@@ -265,6 +265,7 @@ body {
 
     background: rgba(255, 255, 255, 0.5);
     transition: background 0.2s ease, transform 0.1s ease;
+    position: relative;
 }
 
 /* icon */
@@ -299,4 +300,24 @@ body {
 /* make image white in active */
 .controls button.active img {
     filter: brightness(0) invert(1);
+}
+
+.tooltip {
+    position: absolute;
+    bottom: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.75);
+    color: white;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.controls button:hover .tooltip {
+    opacity: 1;
 }

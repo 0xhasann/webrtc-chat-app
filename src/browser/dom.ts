@@ -214,6 +214,9 @@ export function hangUpCall() {
 // gets camera/mic, adds tracks to the peer connection
 export async function attachUserMedia(audio: boolean, video: boolean): Promise<boolean> {
     const pc = RTCPeerConnectionHandler.pc;
+    const shareBtn = document.getElementById("share-button");
+    if (shareBtn)
+        shareBtn.style.display = "block";
 
     try {
         localStream = await navigator.mediaDevices.getUserMedia({
