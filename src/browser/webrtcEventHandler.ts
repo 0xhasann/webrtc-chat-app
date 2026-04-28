@@ -78,7 +78,7 @@ function createPeerConnection(): RTCPeerConnection {
     // shows the hang-up button when connected
     
     pc.onconnectionstatechange = () => {
-        const btn = document.getElementById("hangup-button");
+        const btn = document.getElementById("HangupBtn");
         if (!btn) return;
         if (pc.connectionState === "connected") {
             btn.style.display = "block";
@@ -90,7 +90,7 @@ function createPeerConnection(): RTCPeerConnection {
         if (receivedVideo && event.streams && event.streams[0]) {
             receivedVideo.srcObject = event.streams[0];
         }
-        const hangupBtn = document.getElementById("hangup-button") as HTMLButtonElement | null;
+        const hangupBtn = document.getElementById("HangupBtn") as HTMLButtonElement | null;
         if (hangupBtn) {
             hangupBtn.disabled = false;
         }

@@ -20,7 +20,7 @@ export function disableRemoteNameLabel() {
     const remoteLabel = document.getElementById("remote-name-label") as HTMLSpanElement;
     remoteLabel.textContent = "";
     remoteLabel.style.display = "none";
-    const btn = document.getElementById("hangup-button");
+    const btn = document.getElementById("HangupBtn");
     if (btn) {
         btn.style.display = "none";
     }
@@ -29,7 +29,7 @@ export function disableRemoteNameLabel() {
 
 export function setRemoteNameLabel(remoteName: string) {
     const remoteLabel = document.getElementById("remote-name-label") as HTMLSpanElement;
-    const btn = document.getElementById("hangup-button") as HTMLSpanElement;
+    const btn = document.getElementById("HangupBtn") as HTMLSpanElement;
     const header = document.getElementById("chat-header") as HTMLSpanElement;
     const chatUser = document.getElementById("chat-user") as HTMLSpanElement;
     if (chatUser) {
@@ -179,7 +179,7 @@ export function enableCallbutton() {
             }
         });
     }
-    const btn = document.getElementById("hangup-button");
+    const btn = document.getElementById("HangupBtn");
     if (btn) {
         btn.style.display = "none";
     }
