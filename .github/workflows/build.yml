@@ -31,4 +31,4 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Build browser application
-        run: bun run build:browser:dev
+        run: bun run build:browser:prod
