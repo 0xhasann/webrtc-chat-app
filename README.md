@@ -141,7 +141,7 @@ Install bun (https://bun.sh/), then run:
 
 ### 2. Configure Environment
 
-Create a .env.dev file in the root of the project:
+Create a .env.dev or change the .env.example file in the root of the project:
 
     PORT=3000
     NODE_ENV=dev

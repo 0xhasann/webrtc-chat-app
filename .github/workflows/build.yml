@@ -1,0 +1,34 @@
+name: Node CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Create Environment Files
+        run: |
+          echo "${{ secrets.ENV_DEV }}" > .env.dev
+          echo "${{ secrets.ENV_PROD }}" > .env.prod
+
+      - name: Set up Bun
+        uses: actions/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build browser application
+        run: bun run build:browser:dev
