@@ -23,7 +23,7 @@ jobs:
           echo "${{ secrets.ENV_PROD }}" > .env.prod
 
       - name: Set up Bun
-        uses: actions/setup-bun@v2
+        uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
 
